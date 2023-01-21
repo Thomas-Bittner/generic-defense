@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameDirector : MonoBehaviour
 {
@@ -37,6 +38,12 @@ public class GameDirector : MonoBehaviour
         {
             lastEnemySpawn.Restart();
             this.SpawnEnemy(UnityEngine.Random.Range(0, 4));
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Cursor.visible = true;
+            SceneManager.LoadScene("Scenes/MainMenu");
         }
     }
 
