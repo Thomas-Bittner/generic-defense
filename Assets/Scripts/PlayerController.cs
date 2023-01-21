@@ -21,11 +21,18 @@ public class PlayerController : MonoBehaviour
     public GameObject PrefabCrosshair;
     public GameDirector gameDirector;
 
+    private float screenWidth;
+    private float screenHeight;
+
     public void Start()
     {
         body = GetComponent<Rigidbody2D>();
         gameDirector = GameObject.Find("GameDirector").GetComponent<GameDirector>();
         Instantiate(PrefabCrosshair);
+
+        var dist = (transform.position - Camera.main.transform.position).z;
+        this.screenWidth = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x - 2;
+        this.screenHeight = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y - 2;
     }
 
     public void Update()
@@ -59,6 +66,11 @@ public class PlayerController : MonoBehaviour
         }
 
         body.velocity = new Vector2(horizontalMovement * runSpeed, verticalMovement * runSpeed);
+
+        this.transform.position = new Vector3(
+            Mathf.Clamp(this.transform.position.x, screenWidth * -1, screenWidth),
+            Mathf.Clamp(this.transform.position.y, screenHeight * -1, screenHeight),
+            this.transform.position.z);
 
         if (body.velocity.magnitude > 0)
         {
