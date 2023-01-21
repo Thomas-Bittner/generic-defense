@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\GameDirector.cs" />
+     <Compile Include="Assets\Scripts\ShotBehaviour.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\FollowMouse.cs" />
      <Folder Include="Assets" />
