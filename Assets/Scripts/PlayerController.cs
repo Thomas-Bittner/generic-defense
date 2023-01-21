@@ -1,6 +1,4 @@
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
-using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +8,6 @@ public class PlayerController : MonoBehaviour
     private float verticalMovement;
     private bool isShooting;
     private const float moveLimiter = 0.7f;
-    private GameObject Crosshair;
 
     public float runSpeed = 7.0f;
 
@@ -20,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public void Start()
     {
         body = GetComponent<Rigidbody2D>();
-        Crosshair = Instantiate(PrefabCrosshair);
+        Instantiate(PrefabCrosshair);
     }
 
     public void Update()
