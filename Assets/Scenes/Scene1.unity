@@ -160,6 +160,7 @@ MonoBehaviour:
   gameOverText: {fileID: 1628569973}
   winText: {fileID: 249368207}
   waveCounterText: {fileID: 180520138}
+  explosion: {fileID: 1517588939}
   isGameOver: 0
   waveCounter: 1
 --- !u!4 &83418310
@@ -2667,9 +2668,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7e4c3cec6b056fe47a6e39b256ffcc1b, type: 3}
   - {fileID: 8300000, guid: 9433651add70a2844a37454f3f02c709, type: 3}
   - {fileID: 8300000, guid: 547852f5b66a7c5428e8a6ff25b9e23c, type: 3}
+  enemy0DeathSounds:
+  - {fileID: 8300000, guid: 1e8b4f62254aba84198b3655dde1bab4, type: 3}
+  - {fileID: 8300000, guid: 66c8ec6a809fe3a45942a271cdcc1233, type: 3}
+  enemy1DeathSounds:
+  - {fileID: 8300000, guid: bcd36d62b9f9ed84a8793b7b258506bb, type: 3}
+  - {fileID: 8300000, guid: 0b2ea4299847b7f4aabd038c4f29c516, type: 3}
   gunShotSound: {fileID: 8300000, guid: 0c52c5b6be466734da3d946f725e576d, type: 3}
-  enemy0DeathSound: {fileID: 8300000, guid: 0b2ea4299847b7f4aabd038c4f29c516, type: 3}
-  enemy1DeathSound: {fileID: 8300000, guid: 66c8ec6a809fe3a45942a271cdcc1233, type: 3}
   buildingBreakdownSound: {fileID: 8300000, guid: d4865101d0a85d7448dad61bbc40288f, type: 3}
   backgroundMusicAudioSource: {fileID: 1086316610}
   walkingSoundAudioSource: {fileID: 1086316613}

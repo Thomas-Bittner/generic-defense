@@ -24,11 +24,11 @@ public class HealthBehaviour : MonoBehaviour
     {
         this.Health -= damage;
 
-        var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
-        audioPlayer.PlayBuildingDemolishSound();
-
         if (this.HealthBarFill != null)
         {
+            var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+            audioPlayer.PlayBuildingDemolishSound();
+
             this.AdjustHealthBarFill();
         }
 

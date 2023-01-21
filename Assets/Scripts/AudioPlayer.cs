@@ -5,9 +5,9 @@ public class AudioPlayer : MonoBehaviour
 {
     [SerializeField] private List<AudioClip> footstepSounds;
     [SerializeField] private List<AudioClip> buildingDemolishSounds;
+    [SerializeField] private List<AudioClip> enemy0DeathSounds;
+    [SerializeField] private List<AudioClip> enemy1DeathSounds;
     [SerializeField] private AudioClip gunShotSound;
-    [SerializeField] private AudioClip enemy0DeathSound;
-    [SerializeField] private AudioClip enemy1DeathSound;
     [SerializeField] private AudioClip buildingBreakdownSound;
 
     [SerializeField] private AudioSource backgroundMusicAudioSource;
@@ -47,15 +47,23 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayEnemy0DeathSound()
     {
+        var random = new System.Random();
+        var next = random.Next(enemy0DeathSounds.Count);
+        
         var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = enemy0DeathSound;
+        audioSource.clip = enemy0DeathSounds[next];
+
         audioSource.Play();
     }
 
     public void PlayEnemy1DeathSound()
     {
+        var random = new System.Random();
+        var next = random.Next(enemy1DeathSounds.Count);
+        
         var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = enemy1DeathSound;
+        audioSource.clip = enemy1DeathSounds[next];
+
         audioSource.Play();
     }
 
@@ -76,24 +84,5 @@ public class AudioPlayer : MonoBehaviour
         buildingDemolishSoundAudioSource.clip = buildingDemolishSounds[next];
             
         buildingDemolishSoundAudioSource.Play();
-    }
-
-
-
-    public void Stop()
-    {
-        //_audioSource.Stop();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
