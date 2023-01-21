@@ -32,6 +32,8 @@ public class HealthBehaviour : MonoBehaviour
         if (this.Health <= 0)
         {
             Destroy(this.gameObject);
+            var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+            audioPlayer.PlayBaseCollapseSound();
         }
     }
 
