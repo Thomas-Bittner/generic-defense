@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using UnityEngine;
 
 public class GameDirector : MonoBehaviour
@@ -10,6 +12,7 @@ public class GameDirector : MonoBehaviour
     private float enemySpawnCooldown = 1000;
     private Stopwatch lastEnemySpawn = new Stopwatch();
     private float enemySpawnSpreadLimit = 1.2f;
+    private GameObject Home;
 
     private float cameraWidth;
     private float cameraHeight;
@@ -18,8 +21,11 @@ public class GameDirector : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
+
         Instantiate(Player, new Vector3(-10,0,0), Quaternion.identity);
         lastEnemySpawn.Start();
+
+        Home = GameObject.FindGameObjectsWithTag(Enum.GetName(typeof(Tags), Tags.Home)).FirstOrDefault();
 
         this.cameraWidth = Camera.main.pixelWidth / Camera.main.orthographicSize;
         this.cameraHeight = Camera.main.pixelWidth / Camera.main.orthographicSize;
@@ -32,7 +38,7 @@ public class GameDirector : MonoBehaviour
             lastEnemySpawn.Reset();
             lastEnemySpawn.Start();
 
-            this.SpawnEnemy(Random.Range(0, 4));
+            this.SpawnEnemy(UnityEngine.Random.Range(0, 4));
         }
     }
 
@@ -41,10 +47,11 @@ public class GameDirector : MonoBehaviour
         float enemySpawnSpread;
         float enemySpawnPosition;
         GameObject enemyToSpawn = this.Enemies[0];
+        GameObject enemy;
 
         if (spawn % 2 == 0)
         {
-            enemySpawnSpread = Random.Range(cameraWidth / enemySpawnSpreadLimit, this.cameraWidth / enemySpawnSpreadLimit * -1);
+            enemySpawnSpread = UnityEngine.Random.Range(cameraWidth / enemySpawnSpreadLimit, this.cameraWidth / enemySpawnSpreadLimit * -1);
             enemySpawnPosition = this.cameraHeight;
 
             if (spawn == 2)
@@ -52,11 +59,11 @@ public class GameDirector : MonoBehaviour
                 enemySpawnPosition *= -1;
             }
 
-            Instantiate(enemyToSpawn, new Vector3(enemySpawnSpread, enemySpawnPosition, 0), Quaternion.identity);
+            enemy = Instantiate(enemyToSpawn, new Vector3(enemySpawnSpread, enemySpawnPosition, 0), Quaternion.identity);
         }
         else
         {
-            enemySpawnSpread = Random.Range(cameraHeight / enemySpawnSpreadLimit, this.cameraHeight / enemySpawnSpreadLimit * -1);
+            enemySpawnSpread = UnityEngine.Random.Range(cameraHeight / enemySpawnSpreadLimit, this.cameraHeight / enemySpawnSpreadLimit * -1);
             enemySpawnPosition = this.cameraWidth;
 
             if (spawn == 1)
@@ -69,7 +76,10 @@ public class GameDirector : MonoBehaviour
                 enemyToSpawn = this.Enemies[0];
             }
 
-            Instantiate(enemyToSpawn, new Vector3(enemySpawnPosition, enemySpawnSpread, 0), Quaternion.identity);
+            enemy = Instantiate(enemyToSpawn, new Vector3(enemySpawnPosition, enemySpawnSpread, 0), Quaternion.identity);
         }
+
+        var enemyBehaviour = enemy.GetComponent<EnemyBehaviour>();
+        enemyBehaviour.Target = this.Home;
     }
 }

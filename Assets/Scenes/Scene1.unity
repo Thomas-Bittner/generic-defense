@@ -153,7 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 3931455351068101313, guid: 5a97ae29c1e70504f8b4b0f189d334fe, type: 3}
-  Enemies: []
+  Enemies:
+  - {fileID: 3931455351068101313, guid: 77c8c73ec37df3942ac1c357dffec8c4, type: 3}
 --- !u!4 &83418310
 Transform:
   m_ObjectHideFlags: 0
@@ -798,7 +799,7 @@ GameObject:
   - component: {fileID: 1091655404}
   m_Layer: 0
   m_Name: Home
-  m_TagString: Untagged
+  m_TagString: Home
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

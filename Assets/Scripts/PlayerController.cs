@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         {
             this.isShooting = false;
 
-            var shotSpawn = this.transform.position + (10 * this.transform.forward);
+            var shotSpawn = this.transform.position + (this.transform.forward);
             Instantiate(this.PrefabShot, shotSpawn, this.transform.rotation);
         }
     }
