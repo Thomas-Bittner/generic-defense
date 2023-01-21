@@ -10,6 +10,7 @@ public class GameDirector : MonoBehaviour
     public GameObject Player;
     public List<GameObject> Enemies;
     public GameObject gameOverText;
+    public GameObject explosion;
 
     public bool isGameOver;
 
@@ -90,6 +91,7 @@ public class GameDirector : MonoBehaviour
     public void PerformGameOver()
     {
         isGameOver = true;
+        explosion.SetActive(true);
         gameOverText.SetActive(true);
     }
 }
