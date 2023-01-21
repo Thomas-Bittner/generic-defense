@@ -15,8 +15,8 @@ public class GameDirector : MonoBehaviour
     private float enemySpawnSpreadLimit = 1.2f;
     private GameObject Home;
 
-    private float cameraWidth;
-    private float cameraHeight;
+    private float screenWidth;
+    private float screenHeight;
 
     public void Start()
     {
@@ -28,8 +28,9 @@ public class GameDirector : MonoBehaviour
 
         Home = GameObject.FindGameObjectsWithTag(Enum.GetName(typeof(Tags), Tags.Home)).FirstOrDefault();
 
-        this.cameraWidth = Camera.main.pixelWidth / Camera.main.orthographicSize;
-        this.cameraHeight = Camera.main.pixelWidth / Camera.main.orthographicSize;
+        var dist = (transform.position - Camera.main.transform.position).z;
+        this.screenWidth = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x + 2;
+        this.screenHeight = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y + 2;
     }
 
     public void Update()
@@ -37,7 +38,7 @@ public class GameDirector : MonoBehaviour
         if (lastEnemySpawn.ElapsedMilliseconds > enemySpawnCooldown)
         {
             lastEnemySpawn.Restart();
-            this.SpawnEnemy(UnityEngine.Random.Range(0, 4));
+            this.SpawnEnemy(UnityEngine.Random.Range(0, 3));
         }
 
         if (Input.GetKey(KeyCode.Escape))
@@ -56,8 +57,8 @@ public class GameDirector : MonoBehaviour
 
         if (spawn % 2 == 0)
         {
-            enemySpawnSpread = UnityEngine.Random.Range(cameraWidth / enemySpawnSpreadLimit, this.cameraWidth / enemySpawnSpreadLimit * -1);
-            enemySpawnPosition = this.cameraHeight;
+            enemySpawnSpread = UnityEngine.Random.Range(screenWidth / enemySpawnSpreadLimit, this.screenWidth / enemySpawnSpreadLimit * -1);
+            enemySpawnPosition = this.screenHeight;
 
             // Spawn Down
             if (spawn == 2)
@@ -67,23 +68,13 @@ public class GameDirector : MonoBehaviour
 
             enemy = Instantiate(enemyToSpawn, new Vector3(enemySpawnSpread, enemySpawnPosition, 0), Quaternion.identity);
         }
+        // Spawn Left
         else
         {
-            enemySpawnSpread = UnityEngine.Random.Range(cameraHeight / enemySpawnSpreadLimit, this.cameraHeight / enemySpawnSpreadLimit * -1);
-            enemySpawnPosition = this.cameraWidth;
+            enemySpawnSpread = UnityEngine.Random.Range(screenHeight / enemySpawnSpreadLimit, this.screenHeight / enemySpawnSpreadLimit * -1);
+            enemySpawnPosition = this.screenWidth;
 
-            // Spawn Right
-            if (spawn == 1)
-            {
-                //enemyToSpawn = this.Enemies[0];
-            }
-            // Spawn Left
-            else if (spawn == 3)
-            {
-                //enemySpawnPosition *= -1;
-                enemyToSpawn = this.Enemies[1];
-            }
-
+            enemyToSpawn = this.Enemies[1];
             enemySpawnPosition *= -1;
 
             enemy = Instantiate(enemyToSpawn, new Vector3(enemySpawnPosition, enemySpawnSpread, 0), Quaternion.identity);
