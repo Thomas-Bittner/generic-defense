@@ -12,17 +12,22 @@ public class EnemyBehaviour : MonoBehaviour
     private Rigidbody2D body;
     private float attackSpeed = 1000;
     private Stopwatch attackTimer = new Stopwatch();
+    private GameDirector director;
 
     public void Start()
     {
         this.body = GetComponent<Rigidbody2D>();
+        director = FindObjectOfType<GameDirector>();
         attackTimer.Start();
     }
 
     public void Update()
     {
-        this.LookAtTarget();
-        this.WalkForward();
+        if (director.isGameOver)
+            return;
+        
+        LookAtTarget();
+        WalkForward();
     }
 
     private void LookAtTarget()

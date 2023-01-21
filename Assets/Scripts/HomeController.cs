@@ -6,7 +6,7 @@ public class HomeController : MonoBehaviour
 	
 	private void Start()
 	{
-		director = GameObject.Find("GameDirector").GetComponent<GameDirector>();
+		director = FindObjectOfType<GameDirector>();
 	}
 
 	private void OnDestroy()
