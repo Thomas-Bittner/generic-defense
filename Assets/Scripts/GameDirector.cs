@@ -8,6 +8,6 @@ public class GameDirector : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
-        Instantiate(Player, new Vector3(0,-2,0), Quaternion.identity);
+        Instantiate(Player, new Vector3(-10,0,0), Quaternion.identity);
     }
 }
