@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -6,8 +7,9 @@ public class PlayerController : MonoBehaviour
 
     private float horizontalMovement;
     private float verticalMovement;
-    private bool isShooting;
     private const float moveLimiter = 0.7f;
+    
+    private bool isShooting;
 
     public float runSpeed = 7.0f;
 
@@ -22,10 +24,13 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        // Gives a value between -1 and 1
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
-        isShooting = Input.GetMouseButtonDown(0);
+        
+        if (!isShooting)
+        {
+            isShooting = Input.GetMouseButtonDown(0);
+        }
     }
 
     public void FixedUpdate()
@@ -58,7 +63,10 @@ public class PlayerController : MonoBehaviour
     {
         if (this.isShooting)
         {
-            //Instantiate(this.PrefabShot, this.transform.position, this.)
+            this.isShooting = false;
+
+            var shotSpawn = this.transform.position + (10 * this.transform.forward);
+            Instantiate(this.PrefabShot, shotSpawn, this.transform.rotation);
         }
     }
 }
