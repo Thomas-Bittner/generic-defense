@@ -22,7 +22,7 @@ public class GameDirector : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
 
-        Instantiate(Player, new Vector3(-10,0,0), Quaternion.identity);
+        Instantiate(Player, new Vector3(-5,0,0), Quaternion.identity);
         lastEnemySpawn.Start();
 
         Home = GameObject.FindGameObjectsWithTag(Enum.GetName(typeof(Tags), Tags.Home)).FirstOrDefault();
@@ -35,9 +35,7 @@ public class GameDirector : MonoBehaviour
     {
         if (lastEnemySpawn.ElapsedMilliseconds > enemySpawnCooldown)
         {
-            lastEnemySpawn.Reset();
-            lastEnemySpawn.Start();
-
+            lastEnemySpawn.Restart();
             this.SpawnEnemy(UnityEngine.Random.Range(0, 4));
         }
     }

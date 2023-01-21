@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 1130457923391466031}
   - component: {fileID: 6811933586873353370}
   - component: {fileID: -577637526184569917}
+  - component: {fileID: 8635391145373035259}
   m_Layer: 0
   m_Name: Enemy0
   m_TagString: Enemy
@@ -233,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6772ac0bf5f1345aedd37f00ca579f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 10
   Target: {fileID: 0}
 --- !u!50 &6811933586873353370
 Rigidbody2D:
@@ -266,9 +267,23 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
+--- !u!114 &8635391145373035259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3931455351068101313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4779335dd04a02419a56745154a5c33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 1
+  HealthBarFill: {fileID: 0}
