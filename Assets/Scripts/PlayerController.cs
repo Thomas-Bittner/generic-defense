@@ -1,9 +1,16 @@
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     Rigidbody2D body;
+
+    [SerializeField] private AudioSource walkingSoundAudioSource;
+    [SerializeField] private AudioSource shootingSoundAudioSource;
+    public List<AudioClip> footstepSounds;
 
     private float horizontalMovement;
     private float verticalMovement;
@@ -50,6 +57,11 @@ public class PlayerController : MonoBehaviour
         }
 
         body.velocity = new Vector2(horizontalMovement * runSpeed, verticalMovement * runSpeed);
+
+        if (body.velocity.magnitude > 0)
+        {
+            PlayWalkingSound();
+        }
     }
 
     private void LookToCrosshair()
@@ -67,6 +79,20 @@ public class PlayerController : MonoBehaviour
 
             var shotSpawn = this.transform.position + (this.transform.forward);
             Instantiate(this.PrefabShot, shotSpawn, this.transform.rotation);
+
+            shootingSoundAudioSource.Play();
         }
+    }
+
+    private void PlayWalkingSound()
+    {
+        if (walkingSoundAudioSource.isPlaying) 
+            return;
+
+        var random = new System.Random();
+        var next = random.Next(footstepSounds.Count);
+        walkingSoundAudioSource.clip = footstepSounds[next];
+            
+        walkingSoundAudioSource.Play();
     }
 }
