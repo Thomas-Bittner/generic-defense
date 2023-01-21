@@ -1,16 +1,21 @@
+using System;
+using System.Diagnostics;
 using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public float Speed = 5;
+    public float Speed = 10;
+    public float Damage = 1;
     public GameObject Target;
 
-    private float Health = 1;
     private Rigidbody2D body;
+    private float attackSpeed = 1000;
+    private Stopwatch attackTimer = new Stopwatch();
 
     public void Start()
     {
         this.body = GetComponent<Rigidbody2D>();
+        attackTimer.Start();
     }
 
     public void Update()
@@ -30,16 +35,15 @@ public class EnemyBehaviour : MonoBehaviour
     {
         var force = (this.Target.transform.position - this.transform.position).normalized;
         this.body.velocity = force;
-        //this.transform.Translate(new Vector3(0, Speed * Time.deltaTime, 0), Space.Self);
     }
 
-    private void Damage(float damage)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        this.Health -= damage;
-
-        if (this.Health <= 0)
+        if (collision.gameObject.tag.Equals(Enum.GetName(typeof(Tags), Tags.Home)) &&
+            this.attackTimer.ElapsedMilliseconds > attackSpeed)
         {
-            Destroy(this.gameObject);
+            this.attackTimer.Restart();
+            collision.gameObject.SendMessage("Damage", this.Damage);
         }
     }
 }

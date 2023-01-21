@@ -35,9 +35,7 @@ public class GameDirector : MonoBehaviour
     {
         if (lastEnemySpawn.ElapsedMilliseconds > enemySpawnCooldown)
         {
-            lastEnemySpawn.Reset();
-            lastEnemySpawn.Start();
-
+            lastEnemySpawn.Restart();
             this.SpawnEnemy(UnityEngine.Random.Range(0, 4));
         }
     }
