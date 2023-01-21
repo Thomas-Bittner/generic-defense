@@ -55,7 +55,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     void OnDestroy()
     {
-        var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
-        audioPlayer.PlayEnemyDeathSound();
+        if (!director.isGameOver)
+        {
+            var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+            audioPlayer.PlayEnemyDeathSound();
+        }
     }
 }

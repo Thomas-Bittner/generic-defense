@@ -158,7 +158,7 @@ MonoBehaviour:
   - {fileID: 3931455351068101313, guid: 77c8c73ec37df3942ac1c357dffec8c4, type: 3}
   - {fileID: 3931455351068101313, guid: fecd27df5d162b949a25a910dc890e21, type: 3}
   gameOverText: {fileID: 1628569973}
-  explosion: {fileID: 0}
+  explosion: {fileID: 1517588939}
   isGameOver: 0
 --- !u!4 &83418310
 Transform:
@@ -2419,7 +2419,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3642,6 +3642,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfbdf2134f769dc4486867bd0989e1f4, type: 3}
+--- !u!1 &1517588939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1170567192047786, guid: dfbdf2134f769dc4486867bd0989e1f4, type: 3}
+  m_PrefabInstance: {fileID: 1517588938}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1628569973
 GameObject:
   m_ObjectHideFlags: 0
