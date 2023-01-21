@@ -75,12 +75,12 @@ public class GameDirector : MonoBehaviour
             // Spawn Right
             if (spawn == 1)
             {
-                enemyToSpawn = this.Enemies[0];
+                //enemyToSpawn = this.Enemies[0];
             }
             // Spawn Left
             else if (spawn == 3)
             {
-                // enemySpawnPosition *= -1;
+                //enemySpawnPosition *= -1;
                 enemyToSpawn = this.Enemies[1];
             }
 

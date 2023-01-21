@@ -155,6 +155,7 @@ MonoBehaviour:
   Player: {fileID: 3931455351068101313, guid: 5a97ae29c1e70504f8b4b0f189d334fe, type: 3}
   Enemies:
   - {fileID: 3931455351068101313, guid: 77c8c73ec37df3942ac1c357dffec8c4, type: 3}
+  - {fileID: 3931455351068101313, guid: fecd27df5d162b949a25a910dc890e21, type: 3}
 --- !u!4 &83418310
 Transform:
   m_ObjectHideFlags: 0
