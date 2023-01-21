@@ -52,9 +52,9 @@ public class PlayerController : MonoBehaviour
 
     private void LookToCrosshair()
     {
-        Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        var direction = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
     }
 
     private void Shoot()
