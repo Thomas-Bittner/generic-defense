@@ -266,9 +266,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 231d3eea12d10dc40bded32d640109b7, type: 3}
   - {fileID: 8300000, guid: de22bb92fb2f3284bb7f8eb5796f9db6, type: 3}
   - {fileID: 8300000, guid: 79139ab281060f6409aa4dc34de80dc7, type: 3}
-  runSpeed: 7
+  runSpeed: 10
   PrefabShot: {fileID: 3171539637632121634, guid: fcc525e1d37db4042beab314bf49b87d, type: 3}
   PrefabCrosshair: {fileID: 7876194537692939470, guid: a536cf1b7c0fa4449bc890c70cdf6424, type: 3}
+  gameDirector: {fileID: 0}
 --- !u!82 &7972222953926333380
 AudioSource:
   m_ObjectHideFlags: 0
