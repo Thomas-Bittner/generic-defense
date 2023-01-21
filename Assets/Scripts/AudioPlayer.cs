@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
-    public List<AudioClip> footstepSounds;
+    [SerializeField] private List<AudioClip> footstepSounds;
+    [SerializeField] private List<AudioClip> buildingDemolishSounds;
     [SerializeField] private AudioClip gunShotSound;
-    [SerializeField] private AudioClip enemyDeathSound1;
-    [SerializeField] private AudioClip enemyDeathSound2;
+    [SerializeField] private AudioClip enemy0DeathSound;
+    [SerializeField] private AudioClip enemy1DeathSound;
     [SerializeField] private AudioClip buildingBreakdownSound;
 
     [SerializeField] private AudioSource backgroundMusicAudioSource;
     [SerializeField] private AudioSource walkingSoundAudioSource;
+    [SerializeField] private AudioSource buildingDemolishSoundAudioSource;
     
     private void Awake()
     {
@@ -43,21 +45,38 @@ public class AudioPlayer : MonoBehaviour
         walkingSoundAudioSource.Play();
     }
 
-    public void PlayEnemyDeathSound()
+    public void PlayEnemy0DeathSound()
     {
         var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = enemyDeathSound2;
+        audioSource.clip = enemy0DeathSound;
         audioSource.Play();
     }
 
-    public void PlayBaseCollapseSound()
+    public void PlayEnemy1DeathSound()
+    {
+        var audioSource = CreateDefaultAudioSource();
+        audioSource.clip = enemy1DeathSound;
+        audioSource.Play();
+    }
+
+    public void PlayBuildingBreakdownSound()
     {
         var audioSource = CreateDefaultAudioSource();
         audioSource.clip = buildingBreakdownSound;
         audioSource.Play();
     }
     
+    public void PlayBuildingDemolishSound()
+    {
+        if (buildingDemolishSoundAudioSource.isPlaying) 
+            return;
 
+        var random = new System.Random();
+        var next = random.Next(buildingDemolishSounds.Count);
+        buildingDemolishSoundAudioSource.clip = buildingDemolishSounds[next];
+            
+        buildingDemolishSoundAudioSource.Play();
+    }
 
 
 

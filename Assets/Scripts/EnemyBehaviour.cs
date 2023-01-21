@@ -58,7 +58,15 @@ public class EnemyBehaviour : MonoBehaviour
         if (!director.isGameOver)
         {
             var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
-            audioPlayer.PlayEnemyDeathSound();
+
+            if (gameObject.name.Contains("Enemy0"))
+            {
+                audioPlayer.PlayEnemy0DeathSound();
+            }
+            else
+            {
+                audioPlayer.PlayEnemy1DeathSound();
+            }
         }
     }
 }
