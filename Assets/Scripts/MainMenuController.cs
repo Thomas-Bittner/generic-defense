@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
     public GameObject mainMenuCanvas;
     public GameObject creditsCanvas;
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("Scenes/Scene1");
+    }
     
     public void ShowCredits()
     {
