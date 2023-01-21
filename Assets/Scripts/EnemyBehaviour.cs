@@ -5,7 +5,7 @@ using Debug = System.Diagnostics.Debug;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public float Speed = 10;
+    public float Speed = 5;
     public float Damage = 1;
     public GameObject Target;
 
@@ -40,7 +40,7 @@ public class EnemyBehaviour : MonoBehaviour
     private void WalkForward()
     {
         var force = (this.Target.transform.position - this.transform.position).normalized;
-        this.body.velocity = force;
+        this.body.velocity = force * this.Speed;
     }
 
     private void OnTriggerStay2D(Collider2D collision)

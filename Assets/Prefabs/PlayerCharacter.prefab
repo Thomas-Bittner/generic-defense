@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8929aa8cdab1049ada40f95c7400a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 7
+  runSpeed: 10
   PrefabShot: {fileID: 3171539637632121634, guid: fcc525e1d37db4042beab314bf49b87d, type: 3}
   PrefabCrosshair: {fileID: 7876194537692939470, guid: a536cf1b7c0fa4449bc890c70cdf6424, type: 3}
   gameDirector: {fileID: 0}

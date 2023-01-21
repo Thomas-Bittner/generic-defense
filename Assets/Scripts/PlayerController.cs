@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     
     private bool isShooting;
 
-    public float runSpeed = 7.0f;
+    public float runSpeed = 10.0f;
 
     public GameObject PrefabShot;
     public GameObject PrefabCrosshair;
