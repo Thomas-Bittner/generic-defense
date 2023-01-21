@@ -9,6 +9,9 @@ public class GameDirector : MonoBehaviour
 {
     public GameObject Player;
     public List<GameObject> Enemies;
+    public GameObject gameOverText;
+
+    public bool isGameOver;
 
     private float enemySpawnCooldown = 1000;
     private Stopwatch lastEnemySpawn = new Stopwatch();
@@ -35,7 +38,7 @@ public class GameDirector : MonoBehaviour
 
     public void Update()
     {
-        if (lastEnemySpawn.ElapsedMilliseconds > enemySpawnCooldown)
+        if (!isGameOver && lastEnemySpawn.ElapsedMilliseconds > enemySpawnCooldown)
         {
             lastEnemySpawn.Restart();
             this.SpawnEnemy(UnityEngine.Random.Range(0, 3));
@@ -82,5 +85,11 @@ public class GameDirector : MonoBehaviour
 
         var enemyBehaviour = enemy.GetComponent<EnemyBehaviour>();
         enemyBehaviour.Target = this.Home;
+    }
+
+    public void PerformGameOver()
+    {
+        isGameOver = true;
+        gameOverText.SetActive(true);
     }
 }

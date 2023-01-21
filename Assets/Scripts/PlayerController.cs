@@ -22,10 +22,12 @@ public class PlayerController : MonoBehaviour
 
     public GameObject PrefabShot;
     public GameObject PrefabCrosshair;
+    public GameDirector gameDirector;
 
     public void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        gameDirector = GameObject.Find("GameDirector").GetComponent<GameDirector>();
         Instantiate(PrefabCrosshair);
     }
 
@@ -42,9 +44,12 @@ public class PlayerController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        this.MovePlayer();
-        this.LookToCrosshair();
-        this.Shoot();
+        if (gameDirector.isGameOver)
+            return;
+        
+        MovePlayer();
+        LookToCrosshair();
+        Shoot();
     }
 
     private void MovePlayer()
