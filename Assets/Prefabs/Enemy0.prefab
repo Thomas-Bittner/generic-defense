@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6811933586873353370}
   - component: {fileID: -577637526184569917}
   - component: {fileID: 8635391145373035259}
-  - component: {fileID: 6710781258095236063}
   - component: {fileID: 3426616626900056558}
   m_Layer: 0
   m_Name: Enemy0
@@ -104,21 +103,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 1
   HealthBarFill: {fileID: 0}
---- !u!111 &6710781258095236063
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3931455351068101313}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 71e9927a798c9ab4e95c7e403bd7dc41, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!58 &3426616626900056558
 CircleCollider2D:
   m_ObjectHideFlags: 0
