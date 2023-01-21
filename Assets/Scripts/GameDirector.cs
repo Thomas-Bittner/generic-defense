@@ -59,6 +59,7 @@ public class GameDirector : MonoBehaviour
             enemySpawnSpread = UnityEngine.Random.Range(cameraWidth / enemySpawnSpreadLimit, this.cameraWidth / enemySpawnSpreadLimit * -1);
             enemySpawnPosition = this.cameraHeight;
 
+            // Spawn Down
             if (spawn == 2)
             {
                 enemySpawnPosition *= -1;
@@ -71,15 +72,19 @@ public class GameDirector : MonoBehaviour
             enemySpawnSpread = UnityEngine.Random.Range(cameraHeight / enemySpawnSpreadLimit, this.cameraHeight / enemySpawnSpreadLimit * -1);
             enemySpawnPosition = this.cameraWidth;
 
+            // Spawn Right
             if (spawn == 1)
             {
                 enemyToSpawn = this.Enemies[0];
             }
+            // Spawn Left
             else if (spawn == 3)
             {
-                enemySpawnPosition *= -1;
-                enemyToSpawn = this.Enemies[0];
+                // enemySpawnPosition *= -1;
+                enemyToSpawn = this.Enemies[1];
             }
+
+            enemySpawnPosition *= -1;
 
             enemy = Instantiate(enemyToSpawn, new Vector3(enemySpawnPosition, enemySpawnSpread, 0), Quaternion.identity);
         }
