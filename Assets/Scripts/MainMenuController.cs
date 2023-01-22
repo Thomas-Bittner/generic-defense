@@ -5,6 +5,7 @@ public class MainMenuController : MonoBehaviour
 {
     public GameObject mainMenuCanvas;
     public GameObject creditsCanvas;
+    public GameObject moveMessage;
 
     public void StartGame()
     {
@@ -21,6 +22,11 @@ public class MainMenuController : MonoBehaviour
     {
         mainMenuCanvas.SetActive(true);
         creditsCanvas.SetActive(false);
+    }
+
+    public void ShowMovedMessage()
+    {
+        moveMessage.SetActive(true);
     }
     
     public void ExitGame()
