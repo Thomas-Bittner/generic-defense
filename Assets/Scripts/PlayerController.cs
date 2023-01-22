@@ -12,8 +12,9 @@ public class PlayerController : MonoBehaviour
     private const float moveLimiter = 0.7f;
     
     private bool isShooting;
+    public float shootingRange = 10f;
 
-    private float runSpeed = 10.0f;
+    public float runSpeed = 10.0f;
     private float rateOfFire = 250f;
     private Stopwatch rateOfFireTimer = new Stopwatch();
 
@@ -113,7 +114,10 @@ public class PlayerController : MonoBehaviour
             this.isShooting = false;
 
             var shotSpawn = this.transform.position + (this.transform.forward);
-            Instantiate(this.PrefabShot, shotSpawn, this.transform.rotation);
+            var shot = Instantiate(this.PrefabShot, shotSpawn, this.transform.rotation);
+
+            var shotBehaviour = shot.GetComponent<ShotBehaviour>();
+            shotBehaviour.SelfDestructDistance = shootingRange;
 
             var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
             audioPlayer.PlayGunshot();

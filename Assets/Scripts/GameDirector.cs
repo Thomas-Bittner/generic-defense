@@ -1,11 +1,12 @@
-using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
 {
@@ -31,13 +32,18 @@ public class GameDirector : MonoBehaviour
     private int maxWaveCount = 10;
     private int waveSpawnedEnemyCount;
     private float waveEnemyCount = 10;
+    private bool nextWaveTriggered;
+
+    private GameObject WaveUpDialog;
+    private List<Button> upgradeButtons = new List<Button>();
+    private GameObject player;
 
     public void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined;
 
-        Instantiate(Player, new Vector3(-5,0,0), Quaternion.identity);
+        player = Instantiate(Player, new Vector3(-5,0,0), Quaternion.identity);
         lastEnemySpawn.Start();
 
         Home = GameObject.FindGameObjectsWithTag(Enum.GetName(typeof(Tags), Tags.Home)).FirstOrDefault();
@@ -47,6 +53,10 @@ public class GameDirector : MonoBehaviour
         this.screenHeight = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y + 2;
 
         this.UpdateWaveCounterText();
+
+        WaveUpDialog = GameObject.FindGameObjectWithTag(Enum.GetName(typeof(Tags), Tags.WaveUpDialog));
+        upgradeButtons = FindObjectsOfType<Button>().ToList();
+        WaveUpDialog.SetActive(false);
     }
 
     public void Update()
@@ -66,6 +76,7 @@ public class GameDirector : MonoBehaviour
         }
 
         if (!isGameOver &&
+            !nextWaveTriggered &&
             this.waveEnemyCount <= this.waveSpawnedEnemyCount &&
             GameObject.FindGameObjectsWithTag(Enum.GetName(typeof(Tags), Tags.Enemy)).Length == 0)
         {
@@ -128,6 +139,8 @@ public class GameDirector : MonoBehaviour
 
     private void NextWave()
     {
+        nextWaveTriggered = true;
+
         if (this.waveCounter == this.maxWaveCount)
         {
             isGameOver = true;
@@ -137,17 +150,74 @@ public class GameDirector : MonoBehaviour
 
         var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
         audioPlayer.PlayNextWaveSound();
-
-        this.waveCounter++;
-        this.waveSpawnedEnemyCount = 0;
-        this.waveEnemyCount = (float)(10 * Math.Pow(1.3, (double)waveCounter - 1));
-
-        this.UpdateWaveCounterText();
+        
+        UpgradeHandle();
     }
 
     private void UpdateWaveCounterText()
     {
         var waveCounterText = this.waveCounterText.GetComponent<TextMeshProUGUI>();
         waveCounterText.text = "Welle: " + waveCounter + " / " + maxWaveCount;
+    }
+
+    private void UpgradeHandle()
+    {
+        WaveUpDialog.SetActive(true);
+
+        var enumList = Enum.GetValues(typeof(Upgrades)).OfType<Upgrades>().ToList();
+
+        foreach (var button in upgradeButtons)
+        {
+            button.onClick.RemoveAllListeners();
+            var buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+
+            var enumIndex = UnityEngine.Random.Range(0, enumList.Count);
+            var enumValue = enumList[enumIndex];
+
+            switch (enumValue)
+            {
+                case Upgrades.MovementSpeed:
+                    buttonText?.SetText("Geschwindigkeit");
+                    button.onClick.AddListener(new UnityAction(UpgradeMovementSpeed));
+                    break;
+                case Upgrades.Range:
+                    buttonText?.SetText("Reichweite");
+                    button.onClick.AddListener(new UnityAction(UpgradeRange));
+                    break;
+                default:
+                    break;
+            }
+
+            enumList.RemoveAt(enumIndex);
+        }
+    }
+
+    private void UpgradeMovementSpeed()
+    {
+        var controller = player.GetComponent<PlayerController>();
+        controller.runSpeed *= 1.1f;
+        
+        CloseWaveUpDialog();
+    }
+
+    private void UpgradeRange()
+    {
+        var controller = player.GetComponent<PlayerController>();
+        controller.shootingRange *= 1.1f;
+
+        CloseWaveUpDialog();
+    }
+
+    private void CloseWaveUpDialog()
+    {
+        Time.timeScale = 1;
+        WaveUpDialog.SetActive(false);
+
+        this.waveCounter++;
+        this.waveSpawnedEnemyCount = 0;
+        this.waveEnemyCount = (float)(10 * Math.Pow(1.3, (double)waveCounter - 1));
+
+        this.UpdateWaveCounterText();
+        nextWaveTriggered = false;
     }
 }

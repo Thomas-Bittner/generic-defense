@@ -7,6 +7,7 @@ TagManager:
   - Home
   - Enemy
   - AudioPlayer
+  - WaveUpDialog
   layers:
   - Default
   - TransparentFX

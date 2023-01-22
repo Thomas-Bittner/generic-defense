@@ -2,5 +2,6 @@
 {
     Home,
     Enemy,
-    Player
+    Player,
+    WaveUpDialog
 }

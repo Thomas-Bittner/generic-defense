@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ShotBehaviour : MonoBehaviour
 {
-    private float SelfDestructDistance = 10;
+    public float SelfDestructDistance = 10; // Is overwritten in PlayerController.Shoot()
     private Vector3 StartPosition;
     private float damage = 1;
     private float speed = 3;
