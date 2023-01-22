@@ -163,6 +163,7 @@ public class GameDirector : MonoBehaviour
     private void UpgradeHandle()
     {
         WaveUpDialog.SetActive(true);
+        Cursor.visible = true;
 
         var enumList = Enum.GetValues(typeof(Upgrades)).OfType<Upgrades>().ToList();
 
@@ -212,6 +213,7 @@ public class GameDirector : MonoBehaviour
     {
         Time.timeScale = 1;
         WaveUpDialog.SetActive(false);
+        Cursor.visible = false;
 
         this.waveCounter++;
         this.waveSpawnedEnemyCount = 0;
