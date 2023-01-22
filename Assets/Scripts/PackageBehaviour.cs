@@ -19,6 +19,9 @@ public class PackageBehaviour : MonoBehaviour
     {
         if (aliveTime.ElapsedMilliseconds > timeToDecay)
         {
+            var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+            audioPlayer.PlayPackageDeSpawnSound();
+
             Destroy(this.gameObject);
         }
     }
@@ -27,6 +30,9 @@ public class PackageBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals(Enum.GetName(typeof(Tags), Tags.Player)))
         {
+            var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+            audioPlayer.PlayPackagePickUpSound();
+
             house.SendMessage("Heal", 1);
             Destroy(this.gameObject);
         }
