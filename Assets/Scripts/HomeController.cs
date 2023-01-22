@@ -13,6 +13,7 @@ public class HomeController : MonoBehaviour
 	{
         var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
         audioPlayer.PlayBuildingBreakdownSound();
+		audioPlayer.PlayMenuMusic();
 
 		director.PerformGameOver();
 	}
