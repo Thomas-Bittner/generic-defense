@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using UnityEngine;
-using Debug = System.Diagnostics.Debug;
 
 public class EnemyBehaviour : MonoBehaviour
 {

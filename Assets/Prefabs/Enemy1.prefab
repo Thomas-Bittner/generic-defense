@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -577637526184569917}
   - component: {fileID: 8635391145373035259}
   - component: {fileID: 4064062001829477304}
+  - component: {fileID: 8962382398857356582}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -49,8 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6772ac0bf5f1345aedd37f00ca579f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
-  Damage: 1
   Target: {fileID: 0}
 --- !u!50 &6811933586873353370
 Rigidbody2D:
@@ -119,6 +118,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &8962382398857356582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3931455351068101313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3239c88c64190e74eb8e7e0b3ddebfc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  package: {fileID: 3994266045616927503, guid: 779b26d93ff0137468ecd14e09e4bc98, type: 3}
 --- !u!1001 &689286909235154418
 PrefabInstance:
   m_ObjectHideFlags: 0

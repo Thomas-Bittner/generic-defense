@@ -38,6 +38,18 @@ public class HealthBehaviour : MonoBehaviour
         }
     }
 
+    public void Heal(float heal)
+    {
+        if (this.Health < this.maxHealth)
+        {
+            var newHealth = this.Health + heal;
+            Mathf.Clamp(newHealth, 0, this.maxHealth);
+            this.Health = newHealth;
+        }
+
+        this.AdjustHealthBarFill();
+    }
+
     private void AdjustHealthBarFill()
     {
         this.HealthBarFill.fillAmount = 1 / this.maxHealth * this.Health;
