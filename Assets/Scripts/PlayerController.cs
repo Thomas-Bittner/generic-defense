@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,7 +13,9 @@ public class PlayerController : MonoBehaviour
     
     private bool isShooting;
 
-    public float runSpeed = 10.0f;
+    private float runSpeed = 10.0f;
+    private float rateOfFire = 250f;
+    private Stopwatch rateOfFireTimer = new Stopwatch();
 
     public GameObject PrefabShot;
     public GameObject PrefabCrosshair;
@@ -36,6 +39,8 @@ public class PlayerController : MonoBehaviour
 
         this.elvisWalk = transform.Find("elvis walk animation").gameObject;
         this.elvisIdle = transform.Find("elvis").gameObject;
+
+        rateOfFireTimer.Start();
     }
 
     public void Update()
@@ -46,6 +51,13 @@ public class PlayerController : MonoBehaviour
         if (!isShooting)
         {
             isShooting = Input.GetMouseButtonDown(0);
+        }
+
+        if (Input.GetMouseButton(0) &&
+            rateOfFireTimer.ElapsedMilliseconds > rateOfFire)
+        {
+            rateOfFireTimer.Restart();
+            isShooting = true;
         }
     }
 
