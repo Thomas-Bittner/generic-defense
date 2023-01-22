@@ -20,20 +20,16 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private AudioClip gameMusic;
 
     [SerializeField] private AudioSource musicAudioSource;
-    [SerializeField] private AudioSource backgroundMusicAudioSource;
     [SerializeField] private AudioSource walkingSoundAudioSource;
     [SerializeField] private AudioSource buildingDemolishSoundAudioSource;
+    [SerializeField] private AudioSource gunShotAudioSource;
+    [SerializeField] private AudioSource packageAudioSource;
+    [SerializeField] private AudioSource playerAudioSource;
+    [SerializeField] private AudioSource enemyAudioSource;
 
     private void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
-    }
-    
-    private AudioSource CreateDefaultAudioSource()
-    {
-        var audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.playOnAwake = false;
-        return audioSource;
     }
 
     public void PlayMenuMusic()
@@ -56,18 +52,16 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayStartGameSound()
     {
-        var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = startGameSound;
-        audioSource.Play();
+        gunShotAudioSource.clip = startGameSound;
+        gunShotAudioSource.Play();
 
         PlayGameMusic(0.7f);
     }
 
     public void PlayGunshot()
     {
-        var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = gunShotSound;
-        audioSource.Play();
+        gunShotAudioSource.clip = gunShotSound;
+        gunShotAudioSource.Play();
     }
 
     public void PlayFootStepSound()
@@ -87,10 +81,8 @@ public class AudioPlayer : MonoBehaviour
         var random = new System.Random();
         var next = random.Next(enemy0DeathSounds.Count);
         
-        var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = enemy0DeathSounds[next];
-
-        audioSource.Play();
+        enemyAudioSource.clip = enemy0DeathSounds[next];
+        enemyAudioSource.Play();
     }
 
     public void PlayEnemy1DeathSound()
@@ -98,17 +90,14 @@ public class AudioPlayer : MonoBehaviour
         var random = new System.Random();
         var next = random.Next(enemy1DeathSounds.Count);
         
-        var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = enemy1DeathSounds[next];
-
-        audioSource.Play();
+        enemyAudioSource.clip = enemy1DeathSounds[next];
+        enemyAudioSource.Play();
     }
 
     public void PlayBuildingBreakdownSound()
     {
-        var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = buildingBreakdownSound;
-        audioSource.Play();
+        buildingDemolishSoundAudioSource.clip = buildingBreakdownSound;
+        buildingDemolishSoundAudioSource.Play();
     }
     
     public void PlayBuildingDemolishSound()
@@ -127,29 +116,25 @@ public class AudioPlayer : MonoBehaviour
     {
         // Auf den musicAudioSource?
 
-        var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = gameWonSound;
-        audioSource.Play();
+        packageAudioSource.clip = gameWonSound;
+        packageAudioSource.Play();
     }
 
     public void PlayNextWaveSound()
     {
-        var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = nextWaveSound;
-        audioSource.Play();
+        packageAudioSource.clip = nextWaveSound;
+        packageAudioSource.Play();
     }
 
     public void PlayPackagePickUpSound()
     {
-        var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = packagePickUpSound;
-        audioSource.Play();
+        packageAudioSource.clip = packagePickUpSound;
+        packageAudioSource.Play();
     }
 
     public void PlayPackageDeSpawnSound()
     {
-        var audioSource = CreateDefaultAudioSource();
-        audioSource.clip = packageDeSpawnSound;
-        audioSource.Play();
+        packageAudioSource.clip = packageDeSpawnSound;
+        packageAudioSource.Play();
     }
 }
