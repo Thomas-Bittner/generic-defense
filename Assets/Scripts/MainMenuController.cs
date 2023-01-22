@@ -7,7 +7,7 @@ public class MainMenuController : MonoBehaviour
     public GameObject creditsCanvas;
     public GameObject moveMessage;
 
-    void Start()
+    private void Start()
     {
         var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
         audioPlayer.PlayMenuMusic();
@@ -29,9 +29,6 @@ public class MainMenuController : MonoBehaviour
 
     public void ShowMainMenu()
     {
-        var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
-        audioPlayer.PlayMenuMusic();
-
         mainMenuCanvas.SetActive(true);
         creditsCanvas.SetActive(false);
     }
