@@ -9,9 +9,9 @@ public class PackageLoss : MonoBehaviour
     {
         var result = Random.Range(0, 10);
 
-        //if (result == 7)
-        //{
+        if (result == 7)
+        {
             Instantiate(package, this.transform.position, Quaternion.identity);
-        //}
+        }
     }
 }
