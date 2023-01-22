@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     private float screenWidth;
     private float screenHeight;
 
+    private GameObject elvisWalk;
+    private GameObject elvisIdle;
+
     public void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -33,6 +36,9 @@ public class PlayerController : MonoBehaviour
         var dist = (transform.position - Camera.main.transform.position).z;
         this.screenWidth = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, dist)).x - 2;
         this.screenHeight = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, dist)).y - 2;
+
+        this.elvisWalk = transform.Find("elvis walk animation").gameObject;
+        this.elvisIdle = transform.Find("elvis").gameObject;
     }
 
     public void Update()
@@ -75,6 +81,11 @@ public class PlayerController : MonoBehaviour
         if (body.velocity.magnitude > 0)
         {
             PlayWalkingSound();
+            Animate(true);
+        }
+        else
+        {
+            Animate(false);
         }
     }
 
@@ -108,5 +119,11 @@ public class PlayerController : MonoBehaviour
         walkingSoundAudioSource.clip = footstepSounds[next];
             
         walkingSoundAudioSource.Play();
+    }
+
+    private void Animate(bool isWalking)
+    {
+        this.elvisWalk.SetActive(isWalking);
+        this.elvisIdle.SetActive(!isWalking);
     }
 }

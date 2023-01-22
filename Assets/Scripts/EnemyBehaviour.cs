@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public float Speed = 5;
-    public float Damage = 1;
+    private float Speed = 3;
+    private float Damage = 1;
     public GameObject Target;
 
     private Rigidbody2D body;

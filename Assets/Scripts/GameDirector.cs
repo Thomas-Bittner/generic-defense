@@ -66,7 +66,7 @@ public class GameDirector : MonoBehaviour
         }
 
         if (!isGameOver &&
-            this.waveEnemyCount == this.waveSpawnedEnemyCount &&
+            this.waveEnemyCount <= this.waveSpawnedEnemyCount &&
             GameObject.FindGameObjectsWithTag(Enum.GetName(typeof(Tags), Tags.Enemy)).Length == 0)
         {
             this.NextWave();
