@@ -7,8 +7,17 @@ public class MainMenuController : MonoBehaviour
     public GameObject creditsCanvas;
     public GameObject moveMessage;
 
+    void Start()
+    {
+        var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+        audioPlayer.PlayMenuMusic();
+    }
+
     public void StartGame()
     {
+        var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+        audioPlayer.PlayStartGameSound();
+
         SceneManager.LoadScene("Scenes/Scene1");
     }
     
@@ -20,6 +29,9 @@ public class MainMenuController : MonoBehaviour
 
     public void ShowMainMenu()
     {
+        var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+        audioPlayer.PlayMenuMusic();
+
         mainMenuCanvas.SetActive(true);
         creditsCanvas.SetActive(false);
     }

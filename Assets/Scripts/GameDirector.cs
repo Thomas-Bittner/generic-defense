@@ -120,6 +120,9 @@ public class GameDirector : MonoBehaviour
 
     public void PerformWin()
     {
+        var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+        audioPlayer.PlayGameWonSound();
+
         winText.SetActive(true);
     }
 
@@ -131,6 +134,9 @@ public class GameDirector : MonoBehaviour
             PerformWin();
             return;
         }
+
+        var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+        audioPlayer.PlayNextWaveSound();
 
         this.waveCounter++;
         this.waveSpawnedEnemyCount = 0;

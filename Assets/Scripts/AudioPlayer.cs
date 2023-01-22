@@ -9,11 +9,21 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private List<AudioClip> enemy1DeathSounds;
     [SerializeField] private AudioClip gunShotSound;
     [SerializeField] private AudioClip buildingBreakdownSound;
+    
+    [SerializeField] private AudioClip gameWonSound;
+    [SerializeField] private AudioClip nextWaveSound;
+    [SerializeField] private AudioClip packagePickUpSound;
+    [SerializeField] private AudioClip packageDeSpawnSound;
+    
+    [SerializeField] private AudioClip startGameSound;
+    [SerializeField] private AudioClip menuMusic;
+    [SerializeField] private AudioClip gameMusic;
 
+    [SerializeField] private AudioSource musicAudioSource;
     [SerializeField] private AudioSource backgroundMusicAudioSource;
     [SerializeField] private AudioSource walkingSoundAudioSource;
     [SerializeField] private AudioSource buildingDemolishSoundAudioSource;
-    
+
     private void Awake()
     {
         DontDestroyOnLoad(transform.gameObject);
@@ -24,6 +34,33 @@ public class AudioPlayer : MonoBehaviour
         var audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
         return audioSource;
+    }
+
+    public void PlayMenuMusic()
+    {
+        if (musicAudioSource.isPlaying)
+            musicAudioSource.Stop();
+
+        musicAudioSource.clip = menuMusic;
+        musicAudioSource.Play();
+    }
+
+    public void PlayGameMusic(float delay = 0)
+    {
+        if (musicAudioSource.isPlaying)
+            musicAudioSource.Stop();
+
+        musicAudioSource.clip = gameMusic;
+        musicAudioSource.PlayDelayed(delay);
+    }
+
+    public void PlayStartGameSound()
+    {
+        var audioSource = CreateDefaultAudioSource();
+        audioSource.clip = startGameSound;
+        audioSource.Play();
+
+        PlayGameMusic(0.7f);
     }
 
     public void PlayGunshot()
@@ -84,5 +121,35 @@ public class AudioPlayer : MonoBehaviour
         buildingDemolishSoundAudioSource.clip = buildingDemolishSounds[next];
             
         buildingDemolishSoundAudioSource.Play();
+    }
+
+    public void PlayGameWonSound()
+    {
+        // Auf den musicAudioSource?
+
+        var audioSource = CreateDefaultAudioSource();
+        audioSource.clip = gameWonSound;
+        audioSource.Play();
+    }
+
+    public void PlayNextWaveSound()
+    {
+        var audioSource = CreateDefaultAudioSource();
+        audioSource.clip = nextWaveSound;
+        audioSource.Play();
+    }
+
+    public void PlayPackagePickUpSound()
+    {
+        var audioSource = CreateDefaultAudioSource();
+        audioSource.clip = packagePickUpSound;
+        audioSource.Play();
+    }
+
+    public void PlayPackageDeSpawnSound()
+    {
+        var audioSource = CreateDefaultAudioSource();
+        audioSource.clip = packageDeSpawnSound;
+        audioSource.Play();
     }
 }
