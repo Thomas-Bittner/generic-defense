@@ -4,9 +4,10 @@ using UnityEngine;
 public class ShotBehaviour : MonoBehaviour
 {
     public float SelfDestructDistance = 10; // Is overwritten in PlayerController.Shoot()
+    public float speed = 3;
+
     private Vector3 StartPosition;
     private float damage = 1;
-    private float speed = 3;
     
     public void Start()
     {

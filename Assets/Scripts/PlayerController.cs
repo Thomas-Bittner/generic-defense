@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     
     private bool isShooting;
     public float shootingRange = 10f;
+    public float shotSpeed = 3f;
 
     public float runSpeed = 10.0f;
     public float rateOfFire = 250f;
@@ -118,6 +119,7 @@ public class PlayerController : MonoBehaviour
 
             var shotBehaviour = shot.GetComponent<ShotBehaviour>();
             shotBehaviour.SelfDestructDistance = shootingRange;
+            shotBehaviour.speed = shotSpeed;
 
             var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
             audioPlayer.PlayGunshot();

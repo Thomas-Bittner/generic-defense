@@ -1,5 +1,6 @@
 ﻿public enum Upgrades
 {
     MovementSpeed,
-    Range
+    Range,
+    ShotSpeed
 }

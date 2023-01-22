@@ -213,12 +213,16 @@ public class GameDirector : MonoBehaviour
             switch (upgradeEnumValue)
             {
                 case Upgrades.MovementSpeed:
-                    buttonText?.SetText("Geschwindigkeit");
+                    buttonText?.SetText("Lauf-Geschwindigkeit");
                     button.onClick.AddListener(new UnityAction(UpgradeMovementSpeed));
                     break;
                 case Upgrades.Range:
-                    buttonText?.SetText("Reichweite");
+                    buttonText?.SetText("Geschoss-Reichweite");
                     button.onClick.AddListener(new UnityAction(UpgradeRange));
+                    break;
+                case Upgrades.ShotSpeed:
+                    buttonText?.SetText("Geschoss-Geschwindigkeit");
+                    button.onClick.AddListener(new UnityAction(UpgradeShotSpeed));
                     break;
                 default:
                     break;
@@ -240,6 +244,14 @@ public class GameDirector : MonoBehaviour
     {
         var controller = player.GetComponent<PlayerController>();
         controller.shootingRange *= 1.1f;
+
+        CloseWaveUpDialog();
+    }
+
+    private void UpgradeShotSpeed()
+    {
+        var controller = player.GetComponent<PlayerController>();
+        controller.shotSpeed += 1f;
 
         CloseWaveUpDialog();
     }
