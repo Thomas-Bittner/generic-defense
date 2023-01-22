@@ -11,6 +11,9 @@ public class HomeController : MonoBehaviour
 
 	private void OnDestroy()
 	{
+        var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+        audioPlayer.PlayBuildingBreakdownSound();
+
 		director.PerformGameOver();
 	}
 }

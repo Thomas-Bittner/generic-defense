@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -49,6 +50,23 @@ public class EnemyBehaviour : MonoBehaviour
         {
             this.attackTimer.Restart();
             collision.gameObject.SendMessage("Damage", this.Damage);
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (!director.isGameOver)
+        {
+            var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+
+            if (gameObject.name.Contains("Enemy0"))
+            {
+                audioPlayer.PlayEnemy0DeathSound();
+            }
+            else
+            {
+                audioPlayer.PlayEnemy1DeathSound();
+            }
         }
     }
 }

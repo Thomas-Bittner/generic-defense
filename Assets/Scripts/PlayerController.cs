@@ -5,9 +5,6 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D body;
 
-    [SerializeField] private AudioSource walkingSoundAudioSource;
-    [SerializeField] private AudioSource shootingSoundAudioSource;
-    public List<AudioClip> footstepSounds;
 
     private float horizontalMovement;
     private float verticalMovement;
@@ -80,7 +77,8 @@ public class PlayerController : MonoBehaviour
 
         if (body.velocity.magnitude > 0)
         {
-            PlayWalkingSound();
+            var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+            audioPlayer.PlayFootStepSound();
             Animate(true);
         }
         else
@@ -105,20 +103,9 @@ public class PlayerController : MonoBehaviour
             var shotSpawn = this.transform.position + (this.transform.forward);
             Instantiate(this.PrefabShot, shotSpawn, this.transform.rotation);
 
-            shootingSoundAudioSource.Play();
+            var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+            audioPlayer.PlayGunshot();
         }
-    }
-
-    private void PlayWalkingSound()
-    {
-        if (walkingSoundAudioSource.isPlaying) 
-            return;
-
-        var random = new System.Random();
-        var next = random.Next(footstepSounds.Count);
-        walkingSoundAudioSource.clip = footstepSounds[next];
-            
-        walkingSoundAudioSource.Play();
     }
 
     private void Animate(bool isWalking)

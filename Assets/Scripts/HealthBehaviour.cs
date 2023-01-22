@@ -26,6 +26,9 @@ public class HealthBehaviour : MonoBehaviour
 
         if (this.HealthBarFill != null)
         {
+            var audioPlayer = GameObject.FindGameObjectWithTag("AudioPlayer").GetComponent<AudioPlayer>();
+            audioPlayer.PlayBuildingDemolishSound();
+
             this.AdjustHealthBarFill();
         }
 
