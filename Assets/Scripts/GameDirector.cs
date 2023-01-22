@@ -37,6 +37,7 @@ public class GameDirector : MonoBehaviour
     private GameObject WaveUpDialog;
     private List<Button> upgradeButtons = new List<Button>();
     private GameObject player;
+    private List<SpecialUpgrades> activeOneTimeUpgrades = new List<SpecialUpgrades>();
 
     public void Start()
     {
@@ -165,17 +166,51 @@ public class GameDirector : MonoBehaviour
         WaveUpDialog.SetActive(true);
         Cursor.visible = true;
 
-        var enumList = Enum.GetValues(typeof(Upgrades)).OfType<Upgrades>().ToList();
+        var upgradeEnumList = Enum.GetValues(typeof(Upgrades)).OfType<Upgrades>().ToList();
+        var specialUpgradeEnumList = Enum.GetValues(typeof(SpecialUpgrades)).OfType<SpecialUpgrades>().ToList();
+        specialUpgradeEnumList = specialUpgradeEnumList.Except(activeOneTimeUpgrades).ToList();
 
         foreach (var button in upgradeButtons)
         {
             button.onClick.RemoveAllListeners();
             var buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+            var buttonStar = button.GetComponentsInChildren<Image>().Where(x => x.name.Contains("Special")).First();
 
-            var enumIndex = UnityEngine.Random.Range(0, enumList.Count);
-            var enumValue = enumList[enumIndex];
+            var specialRange = UnityEngine.Random.Range(0, 10);
 
-            switch (enumValue)
+            if (specialRange == 7)
+            {
+                buttonStar.gameObject.SetActive(true);
+
+                var specialUpgradeEnumIndex = UnityEngine.Random.Range(0, specialUpgradeEnumList.Count);
+                var specialUpgradeEnumValue = specialUpgradeEnumList[specialUpgradeEnumIndex];
+
+                switch (specialUpgradeEnumValue)
+                {
+                    case SpecialUpgrades.EmergencyRepair:
+                        buttonText?.SetText("Notfallreparatur");
+                        button.onClick.AddListener(new UnityAction(SpecialUpgradeEmergencyRepair));
+                        break;
+                    case SpecialUpgrades.QuickFireShots:
+                        buttonText?.SetText("Schnellfeuer");
+                        button.onClick.AddListener(new UnityAction(SpecialUpgradeQuickFireShots));
+                        break;
+                    case SpecialUpgrades.ExtremeRange:
+                        buttonText?.SetText("Extreme Reichweite");
+                        button.onClick.AddListener(new UnityAction(SpecialUpgradeExtremeRange));
+                        break;
+                    default:
+                        break;
+                }
+
+                continue;
+            }
+            
+            var upgradeEnumIndex = UnityEngine.Random.Range(0, upgradeEnumList.Count);
+            var upgradeEnumValue = upgradeEnumList[upgradeEnumIndex];
+            buttonStar.gameObject.SetActive(false);
+
+            switch (upgradeEnumValue)
             {
                 case Upgrades.MovementSpeed:
                     buttonText?.SetText("Geschwindigkeit");
@@ -189,7 +224,7 @@ public class GameDirector : MonoBehaviour
                     break;
             }
 
-            enumList.RemoveAt(enumIndex);
+            upgradeEnumList.RemoveAt(upgradeEnumIndex);
         }
     }
 
@@ -205,6 +240,34 @@ public class GameDirector : MonoBehaviour
     {
         var controller = player.GetComponent<PlayerController>();
         controller.shootingRange *= 1.1f;
+
+        CloseWaveUpDialog();
+    }
+
+    private void SpecialUpgradeEmergencyRepair()
+    {
+        var homeHealth = Home.GetComponent<HealthBehaviour>();
+        homeHealth.Heal(homeHealth.maxHealth);
+
+        CloseWaveUpDialog();
+    }
+
+    private void SpecialUpgradeQuickFireShots()
+    {
+        activeOneTimeUpgrades.Add(SpecialUpgrades.QuickFireShots);
+
+        var controller = player.GetComponent<PlayerController>();
+        controller.rateOfFire = 10f;
+
+        CloseWaveUpDialog();
+    }
+
+    private void SpecialUpgradeExtremeRange()
+    {
+        activeOneTimeUpgrades.Add(SpecialUpgrades.ExtremeRange);
+
+        var controller = player.GetComponent<PlayerController>();
+        controller.shootingRange = 100f;
 
         CloseWaveUpDialog();
     }

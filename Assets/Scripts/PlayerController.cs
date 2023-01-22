@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public float shootingRange = 10f;
 
     public float runSpeed = 10.0f;
-    private float rateOfFire = 250f;
+    public float rateOfFire = 250f;
     private Stopwatch rateOfFireTimer = new Stopwatch();
 
     public GameObject PrefabShot;

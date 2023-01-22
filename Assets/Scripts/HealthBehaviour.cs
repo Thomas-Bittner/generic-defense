@@ -5,7 +5,7 @@ public class HealthBehaviour : MonoBehaviour
 {
     public float Health = 1;
 
-    private float maxHealth = 1;
+    public float maxHealth = 1;
 
     [SerializeField]
     private Image HealthBarFill;
